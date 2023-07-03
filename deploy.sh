@@ -6,8 +6,8 @@ sudo npm install -g pm2
 pm2 stop example_app
 cd Example_Application/
 #install dependencies
-npm install
 echo $PRIVATE_KEY > privatekey.pem
 echo $SERVER > server.crt
+npm install
 #start application
 pm2 start ./bin/www -n example_app

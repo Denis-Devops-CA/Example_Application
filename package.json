@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "test": "node_modules/.bin/mocha --reporter mocha-circleci-reporter test/*.js",
+    "test": "mocha --reporter mocha-circleci-reporter test/*.js",
     "dev": "nodemon ./bin/www"
   },
   "dependencies": {
@@ -19,5 +19,12 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.7"
-  }
+  },
+  "description": "# Project Dependencies 1. Node.js 2. Truffle ... --- # Install Dependencies 1. use the cd command to navigate to the downloaded projects directory 2. Run the npm install command",
+  "main": "app.js",
+  "directories": {
+    "test": "test"
+  },
+  "author": "",
+  "license": "ISC"
 }

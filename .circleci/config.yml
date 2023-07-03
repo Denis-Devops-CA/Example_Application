@@ -1,5 +1,6 @@
-version: 2.1
 
+
+version: 2.1
 
 workflows:
   version: 2
@@ -10,25 +11,46 @@ workflows:
             branches:
               only:
                 - main
+      - deploy:
+          filters:
+            branches:
+              only:
+                - main
+          requires:
+            - build
+
+
+
+# Define the jobs we want to run for this project
 jobs:
   build:
     working_directory: ~/ExampleApplication
     docker:
-      - image: circleci/node:10.16.3
+      - image: circleci/node:latest
     steps:
       - checkout
-      - run:
+      - setup_remote_docker
+      - run: 
           name: update-npm
-          command: 'sudo npm install -g npm@5' 
+          command: 'sudo npm install -g npm@8.1.4'
       - restore_cache:
-          key: dependency-cache-{{ checksum "package-lock.json"}}
+          key: dependency-cache-{{ checksum "package-lock.json" }}
       - run:
           name: install-npm
-          command: npm install
+          command: npm install       
       - run:
           name: test-run
           command: npm run test
+      
       - save_cache:
-          key: dependency-cache-{{ checksum "package-lock.json"}} 
+          key: dependency-cache-{{ checksum "package-lock.json" }}
           paths:
-           - ./node_modules
+            - ./node_modules
+
+  deploy:
+    docker:
+      - image: circleci/node:10.16.3
+    steps:
+      - run:
+          name: deploy-application
+          command: ssh -o StrictHostKeyChecking=no $EC2_USERNAME@$EC2_PUBLIC_DNS "export SERVER=\"$SERVER\";export PRIVATE_KEY=\"$PRIVATE_KEY\"; rm -rf Example_Application/ ; git clone https://github.com/Denis-Devops-CA/Example_Application.git ; source Example_Application//deploy.sh"

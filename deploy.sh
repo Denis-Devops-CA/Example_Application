@@ -5,7 +5,7 @@ CURRENT_INSTANCE=$(docker ps -a -q --filter ancestor="$IMAGE_NAME" --format="{{.
 
 #if instance exists stop the instance
 CONTAINER_EXISTS=$(docker ps -a | grep node_app )
-if ["$CURRENT_INSTANCE"]
+if ["$CONTAINER_INSTANCE"]
 then
    docker rm $(docker stop $CURRENT_INSTANCE)
 fi

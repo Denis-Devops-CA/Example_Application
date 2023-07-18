@@ -9,7 +9,7 @@ if [ "$CURRENT_INSTANCE" ]
 then
 	echo "container exists"
    docker rm $(docker stop $CURRENT_INSTANCE)
-else "container does not exist"
+else echo "container does not exist"
 fi
 
 #pull down instance from docker hub

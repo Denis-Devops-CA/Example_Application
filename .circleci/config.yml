@@ -61,11 +61,11 @@ jobs:
          
       - run:
          name: copy-server-cert-and-private-key-accross
-         command: docker cp ./privatekey.pem integration_app:/privatekey/.pem; docker cp   ./server.crt integration_app:/server.crt
+         command:  docker cp ./server.crt integration_app:/server.crt
       
       - run:
          name: start-docker-container
-         command: docker start integration app
+         command: docker start integration_app
       
       - save_cache:
           key: dependency-cache-{{ checksum "package-lock.json" }}

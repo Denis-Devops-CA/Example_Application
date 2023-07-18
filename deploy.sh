@@ -15,7 +15,7 @@ docker pull $IMAGE_NAME
 
 #check if container exists
 CONTAINER_EXISTS=$(docker ps -a | grep node_app )
-if ["$CONTAINER_EXISTS"]
+if [ "$CONTAINER_EXISTS" ]
 then
 	docker rm node_app
 fi

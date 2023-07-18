@@ -7,7 +7,9 @@ CURRENT_INSTANCE=$(docker ps -a -q --filter ancestor="$IMAGE_NAME" --format="{{.
 
 if [ "$CURRENT_INSTANCE" ]
 then
+	echo "container exists"
    docker rm $(docker stop $CURRENT_INSTANCE)
+else "container does not exist"
 fi
 
 #pull down instance from docker hub
@@ -33,7 +35,7 @@ if [ "$CONTAINER_EXISTS" ]
 then
 	echo "container exists...."
 else
-	echo "node_app does not exist"
+	echo "node_app does not exist........."
 	
 fi
 

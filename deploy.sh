@@ -23,3 +23,18 @@ else
     echo "Image '$IMAGE_NAME' does not exist."
 fi
 
+CONTAINER_EXISTS=$(docker ps -a | grep node_app)
+if [ "$CONTAINER_EXISTS" ]
+then
+	docker rm node_app
+fi
+
+docker create -p 8443:8443 --name node_app $IMAGE_NAME
+#write private key to a file
+echo $PRIVATE_KEY > privatekey.pem
+#write the server key to a file
+echo $SERVER > server.crt
+#add the server key to the node-app docker container
+docker cp ./privatekey.pem node_app:/privatekey.pem
+docker cp ./server.crt node_app:/server.crt
+docker start node_app

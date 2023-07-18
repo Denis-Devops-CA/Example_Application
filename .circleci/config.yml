@@ -65,7 +65,7 @@ jobs:
          
       - run:
          name: copy-private-key
-         command: docker cp ./privatekey.pem integration_app:/privatekey/.pem
+         command: docker cp ./privatekey.pem integration_app:/privatekey.pem
       
       - run:
          name: start-docker-container

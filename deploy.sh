@@ -32,7 +32,8 @@ if [ "$CONTAINER_EXISTS" ]
 	
 then
 	echo "container exists...."
-	
+else
+	echo "node_app does not exist"
 	
 fi
 

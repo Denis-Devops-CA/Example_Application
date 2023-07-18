@@ -40,5 +40,5 @@ docker cp ./privatekey.pem node_app:/privatekey.pem
 echo "add server key"
 docker cp ./server.crt node_app:/server.crt
 
-echo ""start node_app
+echo "start node_app"
 docker start node_app

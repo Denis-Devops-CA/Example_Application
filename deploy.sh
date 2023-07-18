@@ -16,6 +16,14 @@ fi
 docker pull $IMAGE_NAME
 echo "image pulled :OK"
 
+IMAGE_EXISTS=$(docker images --format "{{.Repository}}:{{.Tag}}" | grep "$IMAGE_NAME")
+if [ -n "$IMAGE_EXISTS" ]; then
+    echo "Image '$IMAGE_NAME' exists."
+else
+    echo "Image '$IMAGE_NAME' does not exist."
+fi
+
+
 #check if container exists
 CONTAINER_EXISTS=$(docker ps -a | grep node_app )
 if [ "$CONTAINER_EXISTS" ]

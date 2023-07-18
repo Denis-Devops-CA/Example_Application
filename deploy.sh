@@ -17,7 +17,9 @@ echo "image pulled :OK"
 #check if container exists
 CONTAINER_EXISTS=$(docker ps -a | grep node_app )
 if [ "$CONTAINER_EXISTS" ]
+	
 then
+	echo "container exists -> remove container"
 	docker rm node_app
 fi
 

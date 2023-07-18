@@ -55,11 +55,11 @@ jobs:
           name: set-environment-variables
           command: echo $SERVER > server.crt && echo $PRIVATE_KEY > privatekey.pem
       
-      - run
+      - run:
          name: build-docker-image-for-integration-environment
          command: docker create -p 8443:8443 –name integration_app $IMAGE_NAME
          
-      - run
+      - run:
          name: copy-server-cert-and-private-key-accross
          command: docker cp ./privatekey.pem integration_app:/privatekey/.pem; docker cp   ./server.crt integration_app:/server.crt
       
